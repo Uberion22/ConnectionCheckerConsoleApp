@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json;
 
 namespace TestService
@@ -27,7 +28,7 @@ namespace TestService
                     result = settings;
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 SaveJsonToFile<Settings>(result, settingsPath);
             }

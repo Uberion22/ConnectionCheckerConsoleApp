@@ -12,13 +12,12 @@ namespace TestService
 
         public List<string> WebsiteAddresses { get; set; }
 
-        public List<string> DBAdreses { get; set; }
+        public string DBAdreses { get; set; }
 
         public Settings()
         {
             MailSenderSettings = new MailSenderSettings();
             WebsiteAddresses = new List<string>() {_defaultWebSite};
-            DBAdreses = new List<string>();
         }
     }
 }

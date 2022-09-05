@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -7,9 +8,9 @@ namespace TestService
 {
     internal class SiteChecker
     {
-        private static async Task<CheckResultModel> CheckSite(string adress)
+        private static async Task<WebSiteCheckResult> CheckSiteAsync(string adress)
         {
-            var result = new CheckResultModel() { Adress = adress };
+            var result = new WebSiteCheckResult() { Adress = adress };
             WebRequest request = WebRequest.Create(adress);
             try
             {
@@ -32,15 +33,15 @@ namespace TestService
             return result;
         }
 
-        public static List<CheckResultModel> CheckWebSItesByAdresesList(List<string> adresses)
+        public static List<WebSiteCheckResult> CheckWebSItesByAdresesList(List<string> adresses)
         {
-            var tasks = new Task<CheckResultModel>[adresses.Count];
-            var result = new List<CheckResultModel>();
+            var tasks = new Task<WebSiteCheckResult>[adresses.Count];
+            var result = new List<WebSiteCheckResult>();
             
             for(int i = 0; i < adresses.Count; i++)
             {
                 var index = i;
-                tasks[index] = Task.Run(() => CheckSite(adresses[index]));
+                tasks[index] = Task.Run(() => CheckSiteAsync(adresses[index]));
             }
 
             Task.WaitAll(tasks);
@@ -53,18 +54,24 @@ namespace TestService
             return result;
         }
 
-        //public static async Task<bool> CheckDBAsync()
-        //{
-        //    using OleDbConnection myConnection = new OleDbConnection(connectString);
-        //    try
-        //    {
-        //        await myConnection.OpenAsync();
-        //        return true;
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-        //}
+        public static DatabaseServerCheckResult CheckDBConnection(string connectionString)
+        {
+            var result = new DatabaseServerCheckResult { ConnectionString = connectionString };
+            try
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                conn.Open();
+                result.CheckDataTime = DateTime.UtcNow;
+                result.DataBaseAvailable = true;
+                
+                return result;
+            }
+            catch
+            {
+                result.CheckDataTime = DateTime.UtcNow;
+                
+                return result;
+            }
+        }
     }
 }

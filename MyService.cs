@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.ServiceProcess;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace TestService
 {
@@ -17,13 +14,19 @@ namespace TestService
         private void StartChecking()
         {
             var settings = FileManager.GetSettingsFromFile();
-            var checkResult = SiteChecker.CheckWebSItesByAdresesList(settings.WebsiteAddresses);
+            var webSiteCheckResult = SiteChecker.CheckWebSItesByAdresesList(settings.WebsiteAddresses);
+            var dataBaseServerCheckResult = SiteChecker.CheckDBConnection(settings.DBAdreses);
+            var result = new CheckResultData()
+            {
+                WebSiteCheckResults = webSiteCheckResult,
+                DatabaseServerCheckResult = dataBaseServerCheckResult
+            };
             var savePath = Path.Combine(CheckingService.SAVE_PATH, CHECK_RESULT);
-            FileManager.SaveJsonToFile(checkResult, savePath);
+
+            FileManager.SaveJsonToFile(result, savePath);
             var sender = new MailSender();
             //sender.SendMessage(CHECK_RESULT);
         }
-
 
         public void CheckWebSitesAndDataBase(string[] args)
         {
