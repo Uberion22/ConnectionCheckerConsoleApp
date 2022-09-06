@@ -16,14 +16,14 @@ namespace TestService.Utils
             _mailSenderSettings = mailSenderSettings;
         }
 
-        private async Task SendMessageAsync(string mailTo, string attachmentString)
+        private async Task SendMessage(string mailTo, string attachmentString)
         {
             try
             {
                 MailAddress from = new MailAddress(_mailSenderSettings.SenderEMail, _mailSenderSettings.SenderName);
                 MailAddress to = new MailAddress(mailTo);
                 MailMessage mailMessage = new MailMessage(from, to);
-                mailMessage.Subject = $"Тесто провекри {DateTime.UtcNow}";
+                mailMessage.Subject = $"Тест провекри {DateTime.UtcNow}";
                 mailMessage.Body = "<h2>Результат последней проверки</h2>";
                 mailMessage.IsBodyHtml = true;
                 mailMessage.Attachments.Add(new Attachment(attachmentString));
@@ -45,10 +45,16 @@ namespace TestService.Utils
                 return;
             }
 
-            foreach (var email in _mailSenderSettings.ReceiverEmails)
+            Task[] tasks = new Task[_mailSenderSettings.ReceiverEmails.Count];
+            Program.logger.Info("Start sending!");
+
+            for (var i = 0; i < tasks.Length; i++)
             {
-                Task.Run(() => SendMessageAsync(email, attachment));
+                var index = i;
+                tasks[index] =Task.Run(() => SendMessage(_mailSenderSettings.ReceiverEmails[index], attachment));
             }
+
+            Task.WaitAll(tasks);
         }
     }
 }

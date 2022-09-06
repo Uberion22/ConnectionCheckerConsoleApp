@@ -5,11 +5,11 @@ using TestService.Utils;
 
 namespace TestService
 {
-    public class CheckingService 
+    public class MyCheckingService 
     {
         private readonly Settings _settings;
 
-        public CheckingService(Settings settings)
+        public MyCheckingService(Settings settings)
         {
             _settings = settings;
         }
@@ -31,6 +31,7 @@ namespace TestService
                 var loadPath = Path.Combine(Directory.GetCurrentDirectory(), _settings.AttachmentFileName);
                 var lastCheckResult = FileManager.GetJsonFromFile(loadPath);
                 Console.WriteLine(lastCheckResult);
+                Console.ReadLine();
             }
             else
             {
