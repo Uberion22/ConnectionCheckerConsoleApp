@@ -10,9 +10,9 @@ namespace TestService
         {
             var sheckingService = new CheckingService();
 
-            //var ar = new string[] { "1" };
-            sheckingService.CheckWebSitesAndDataBase(args);
-            //sheckingService.CheckWebSitesAndDataBase(ar);
+            var ar = new string[] { "1" };
+            //sheckingService.CheckWebSitesAndDataBase(args);
+            sheckingService.CheckWebSitesAndDataBase(ar);
         }
     }
 }

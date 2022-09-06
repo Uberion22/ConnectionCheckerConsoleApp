@@ -34,8 +34,11 @@ namespace TestService
             {
                 var savePath = Path.Combine(CheckingService.SAVE_PATH, LOG);
                 var loadPath = Path.Combine(CheckingService.SAVE_PATH, ATTACHMENT_PATH);
-                var sender = new MailSender();
-                sender.SendMessage(loadPath);
+                //var sender = new MailSender();
+                //sender.SendMessage(loadPath);
+                var lastCheckResult = FileManager.GetJsonFromFile(loadPath);
+              
+                Console.WriteLine(lastCheckResult);
                 File.AppendAllText(savePath, $"{DateTime.UtcNow} Site: {string.Join(',', args)}");
             }
             else
