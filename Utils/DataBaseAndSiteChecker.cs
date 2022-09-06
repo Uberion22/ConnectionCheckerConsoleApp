@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using TestService.ResultData;
+using ConnectionCheckerConsoleApp.ResultData;
 
-namespace TestService.Utils
+namespace ConnectionCheckerConsoleApp.Utils
 {
     public class DataBaseAndSiteChecker
     {

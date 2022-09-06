@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
-using TestService.SettingsModels;
-using TestService.Utils;
+using ConnectionCheckerConsoleApp.SettingsModels;
+using ConnectionCheckerConsoleApp.Utils;
 
-namespace TestService
+namespace ConnectionCheckerConsoleApp
 {
     public class MyCheckingService 
     {

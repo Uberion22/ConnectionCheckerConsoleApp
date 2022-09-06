@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TestService.SettingsModels
+namespace ConnectionCheckerConsoleApp.SettingsModels
 {
     public class Settings
     {

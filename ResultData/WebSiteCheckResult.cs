@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestService.ResultData
+namespace ConnectionCheckerConsoleApp.ResultData
 {
     public class WebSiteCheckResult
     {

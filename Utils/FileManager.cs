@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace TestService.Utils
+namespace ConnectionCheckerConsoleApp.Utils
 {
     public class FileManager
     {

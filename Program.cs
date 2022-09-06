@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using NLog;
-using TestService.SettingsModels;
+using ConnectionCheckerConsoleApp.SettingsModels;
 
-namespace TestService
+namespace ConnectionCheckerConsoleApp
 {
     public class Program
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TestService.ResultData
+namespace ConnectionCheckerConsoleApp.ResultData
 {
     public class CheckResultData
     {
