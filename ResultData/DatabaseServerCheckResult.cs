@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestService
+namespace TestService.ResultData
 {
     public class DatabaseServerCheckResult
     {

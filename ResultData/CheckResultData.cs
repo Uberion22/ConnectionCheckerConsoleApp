@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace TestService
+namespace TestService.ResultData
 {
     public class CheckResultData
     {
-        public DatabaseServerCheckResult DatabaseServerCheckResult { get; set; }
+        public IEnumerable<DatabaseServerCheckResult> DatabaseServerCheckResult { get; set; }
 
         public IEnumerable<WebSiteCheckResult> WebSiteCheckResults { get; set; }
     }
